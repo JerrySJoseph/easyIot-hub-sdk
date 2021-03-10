@@ -1,7 +1,10 @@
 const serverConnection=require('./connection/server-connection');
+const commandProcessor=require('./helpers/command-processor')
 
+//Initialting a null socket
 let mSocket=null;
 
+//A promise to initialize the engine
 const initEngine=(SERVER_URL)=>{
 return new Promise((resolve,reject)=>{
 
@@ -17,7 +20,7 @@ return new Promise((resolve,reject)=>{
 })
 }
 
-
+//called when Connection Established
 const onConnectListener=(socket)=>{
 
     const sid=mSocket.id!=null?mSocket.id:"unknown socket id";
@@ -26,9 +29,13 @@ const onConnectListener=(socket)=>{
     //Send hub handshake event immediately after connect
     mSocket.emit('hub-handshake',"some random hub ID",onHubHandshakeListener);
 }
+
+//called when new command recived
 const onCommandListener=(msg)=>{
     console.log('New command recieved: '+msg)
 }
+
+//called when handshake acknowloedgemt is recived
 const onHubHandshakeListener=(response)=>{
     console.log("Handshake response from server: "+response);
 }
