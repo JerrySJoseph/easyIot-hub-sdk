@@ -1,21 +1,10 @@
 const express=require('express');
-const io=require('socket.io-client');
+
 const app=express();
 
-const socket=io.connect('http://192.168.1.26:3001',{reconnection:true});
 
 app.use(express.static(__dirname+'/public'));
 
-const PORT=5000;
-socket.on('connect',()=>{
-    console.log('connected to Server')
-    socket.emit('hub-handshake',"Hi from hub1",(response)=>{
-        console.log(response);
-    })
-    
-})
-socket.on('command',(msg)=>{
-    console.log("Command recieved: "+msg);
-})
+const PORT=process.env.PORT ||5000 ;
 
-app.listen(PORT,()=>console.log("Hub server is listening on port "+PORT))
+const listener=app.listen(0,()=>console.log("Hub server is listening on port "+listener.address().port))
