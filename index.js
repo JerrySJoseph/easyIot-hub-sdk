@@ -1,21 +1,20 @@
 const express=require('express');
+const connectionRouter=require('./routes/connection-route');
 
-//importing Iot-Engine 
-const iotEngine=require('./iotEngine');
 
-//Warning: Change the Server URL according to your network
-const SERVER_URL='http://192.168.1.26:3001'
+const PORT=4848;
 
 
 const app=express();
 
 //For serving static file for UI
 app.use(express.static(__dirname+'/public'));
+app.use(express.json())
 
-//Initializing the Iot-Engine
-iotEngine.initEngine(SERVER_URL)
-.then(()=>console.log("Iot engine is up and connected to master server at "+SERVER_URL))
-.catch((err)=>console.log(err));
+//routes
+app.use('/api/connection',connectionRouter);
+
+
 
 //Listen to any free port for the UI
 const listener=app.listen(0,()=>console.log("Hub UI is available on localip:"+listener.address().port))
