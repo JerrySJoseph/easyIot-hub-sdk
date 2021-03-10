@@ -11,6 +11,7 @@ $( "#register_button" ).click(function() {
         name:name,
         password:pass
     };
+
     //fetching the API response
     const url=ip+REGISTER_ROUTE;
 
@@ -37,12 +38,11 @@ $( "#register_button" ).click(function() {
 
 function showAlert( message, alerttype ) {
 
-   
-$('#alert_placeholder').html(' <div class="alert '+alerttype+'" id="alertdiv" role="alert">'+message+'</div>')
+    $('#alert_placeholder').html(' <div class="alert '+alerttype+'" id="alertdiv" role="alert">'+message+'</div>')
 
     // close it in 3 secs
     setTimeout( function() {
-        $("#alertdiv").remove();
-    }, 10000);
+            $("#alertdiv").remove();
+        }, 10000);
 
 }
