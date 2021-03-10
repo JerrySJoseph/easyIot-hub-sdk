@@ -17,4 +17,4 @@ app.use('/api/connection',connectionRouter);
 
 
 //Listen to any free port for the UI
-const listener=app.listen(0,()=>console.log("Hub UI is available on localip:"+listener.address().port))
+const listener=app.listen(5000,()=>console.log("Hub UI is available on localip:"+listener.address().port))

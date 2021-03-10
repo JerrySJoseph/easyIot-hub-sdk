@@ -1,0 +1,20 @@
+### Register 
+POST  http://192.168.1.26:3001/api/v1/hub/register
+Content-Type: application/json
+
+{
+    "name":"Hub 1",
+    "password":"jerin.sebastian"
+}
+###
+
+GET http://192.168.1.26:3001/api/v1/hub/read
+
+###
+
+DELETE http://192.168.1.26:3001/api/v1/hub/delete
+Content-Type: application/json
+
+{
+    "id":"6048df34e1c471121ceeffbd"
+}
