@@ -1,18 +1,36 @@
-const io=require('socket.io-client');
+const serverConnection=require('./connection/server-connection');
 
+let mSocket=null;
 
+const initEngine=(SERVER_URL)=>{
+return new Promise((resolve,reject)=>{
 
-const socket=io.connect('http://192.168.1.26:3001',{reconnection:true});
+       serverConnection.initServerConnection(SERVER_URL)
+        .then((socket)=>{
+            mSocket=socket;
+            // register socket events
+            socket.on('connect',onConnectListener)
+            socket.on('command',onCommandListener)
+            resolve();
+        }).catch((error)=>reject(error));
 
-
-socket.on('connect',()=>{
-    console.log('connected to Server')
-    socket.emit('hub-handshake',"Hi from hub1",(response)=>{
-        console.log(response);
-    })
-    
 })
+}
 
-socket.on('command',(msg)=>{
-    console.log("Command recieved: "+msg);
-})
+
+const onConnectListener=(socket)=>{
+
+    const sid=mSocket.id!=null?mSocket.id:"unknown socket id";
+    console.log('Connected to Server in socket: '+sid)
+
+    //Send hub handshake event immediately after connect
+    mSocket.emit('hub-handshake',"some random hub ID",onHubHandshakeListener);
+}
+const onCommandListener=(msg)=>{
+    console.log('New command recieved: '+msg)
+}
+const onHubHandshakeListener=(response)=>{
+    console.log("Handshake response from server: "+response);
+}
+
+module.exports={initEngine}

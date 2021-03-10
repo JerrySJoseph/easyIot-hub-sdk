@@ -1,7 +1,13 @@
 const express=require('express');
+const iotEngine=require('./iotEngine');
+
+const SERVER_URL='http://192.168.1.26:3001'
 
 const app=express();
 
+iotEngine.initEngine(SERVER_URL)
+.then(()=>console.log("Iot engine is up and running on "+SERVER_URL))
+.catch((err)=>console.log(err));
 
 app.use(express.static(__dirname+'/public'));
 
