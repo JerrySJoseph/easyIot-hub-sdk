@@ -2,27 +2,30 @@
 const REGISTER_ROUTE='/api/v1/hub/register';
 const LOGIN_ROUTE='/api/v1/hub/login';
 
+$(document).ready(function(){
 
-
-//registering events
 
 $( "#register_button" ).click(function() {
-        register();
-  });
+    register();
+});
 
 $( "#registermodal" ).keypress(function(e) {
-    
-    if(e.which===13)
-        register();
+
+if(e.which===13)
+    register();
 });
 $( "#loginmodal" ).keypress(function(e) {
-    
-    if(e.which===13)
-        login();
+
+if(e.which===13)
+    login();
 });
-  $("#login_button").click(function() {
-        login();
-  });
+$("#login_button").click(function() {
+    login();
+});
+
+
+})
+
 
 
 // methods
@@ -57,6 +60,7 @@ function register()
     .then(jsondata=>{
         if(jsondata.success)
             {
+                
                 showAlertRegister(`Your hub has been registered successfully. Close this dialog and Login with Hub name : ${jsondata.msg.name} and the your password`,'alert-success');
             }
             else
@@ -92,8 +96,8 @@ function login() {
         if(jsondata.success)
             {
                 
-                
-                window.location.href='/dashboard.html'
+               window.localStorage.setItem('accessToken',jsondata.msg.accessToken)
+               window.location.href='/dashboard.html'
             }
             else
             showAlertLogin(`<strong>Error</strong>: ${jsondata.msg}`,

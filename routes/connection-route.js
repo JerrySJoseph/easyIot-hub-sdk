@@ -9,7 +9,7 @@ router.post('/connect',(req,res)=>{
     else
         {
             connectionController.startEngine(serverUrl)
-            .then(()=>res.status(200).send("Connected to server at url "+ serverUrl))
+            .then(()=>res.status(200).send({success:true,msg:"Connected to server",url:serverUrl}))
             .catch((error)=>res.status(400).send(error));
         }
 })

@@ -1,11 +1,12 @@
 body{
     background-color:whitesmoke;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
 }
 .card{
     border-radius: 15px;
     height: fit-content;
     width: 100%;
+    overflow: hidden;
 }
 .card-body:hover{
     background-color: #e1e9eb;
@@ -19,18 +20,19 @@ body{
     flex-direction: column;
     justify-content:space-evenly;
 }
+.card-online .card-footer, .card-online .card-header{
+    background-color: #d4edc7;
+}
+.card-offline .card-footer, .card-offline .card-header{
+    background-color: #edc7c7;
+}
 .card-header{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;    
 }
-.card-header-online,.card-footer-online{
-    background-color: #d4edc7;
-}
-.card-header-offline,.card-footer-offline{
-    background-color: #edc7c7;
-}
+
 .card-footer{
     height: 4rem;
 }
