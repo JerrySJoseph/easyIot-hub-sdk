@@ -6,15 +6,22 @@ Content-Type: application/json
     "name":"Hub 1",
     "password":"jerin.sebastian"
 }
-###
 
+### Read
 GET http://192.168.1.26:3001/api/v1/hub/read
 
-###
-
+### Delete
 DELETE http://192.168.1.26:3001/api/v1/hub/delete
 Content-Type: application/json
 
 {
     "id":"6048df34e1c471121ceeffbd"
+}
+### Login 
+POST http://192.168.1.26:3001/api/v1/hub/login
+Content-Type: application/json
+
+{
+    "name":"Hub 1",
+    "password":"jerin.sebastian"
 }
